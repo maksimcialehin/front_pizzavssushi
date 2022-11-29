@@ -1,22 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import PizzaList from './pizzerias/pizzerialist';
+import './App.css'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src="https://static.vecteezy.com/system/resources/previews/009/384/620/original/fresh-pizza-and-pizza-box-clipart-design-illustration-free-png.png" className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Web App for pizza and sushi lovers.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>
+          Pizza vs Sushi
+        </h1>
+        <PizzaList/>
       </header>
     </div>
   );

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "restaurant_name": "Dodo Pizza",
+        "street": "Dzianisauskaja, 8",
+        "city": "Minsk"
+    },
+    {
+        "id": 2,
+        "restaurant_name": "Domino's Pizza",
+        "street": "Rakassouskaha, 1",
+        "city": "Minsk"
+    },
+    {
+        "id": 3,
+        "restaurant_name": "Pizza Tempo",
+        "street": "Karla Marksa, 26",
+        "city": "Minsk"
+    }
+]
