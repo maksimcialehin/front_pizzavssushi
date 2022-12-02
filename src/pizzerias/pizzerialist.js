@@ -1,29 +1,63 @@
 import React, { Component } from 'react';
-import Data from './data.json';
-import PizzaDetail from './pizzeriadetail'
+import PizzaDetail from './pizzeriadetail';
 import axios from 'axios';
+import PizzaForm from './pizzeriaform';
 
 class PizzaList extends Component {
-    componentDidMount(){
-        axios.get("http://127.0.0.1:8000/")
-        .then((response) => {
-            console.log(response)
-        })
-        .catch(function (error) {
-            console.log(error);
-            })
+    constructor(props) {
+        super(props);
+        this.state = {
+            pizzeriasData: [],
+            pizzeria: " ",
+            showComponent: false,
         }
-    
+        this.getPizzaDetail=this.getPizzaDetail.bind(this);
+        this.showPizzeriaDetail=this.showPizzeriaDetail.bind(this);
+    }
+   
+    getPizzaDetail(item){
+        axios
+            .get("http://127.0.0.1:8000".concat(item.absolute_url))
+            .then((response) => {
+                this.setState({pizzeria: response.data})
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+
+    showPizzeriaDetail(item){
+        this.getPizzaDetail(item);
+        this.setState({ showComponent: true });
+    }
+
+    componentDidMount(){
+        axios
+            .get("http://127.0.0.1:8000/")
+            .then((response) => {
+                this.setState({pizzeriasData: response.data})
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     render(){
         return(
             <div>
-                {Data.map( item =>{
-                return <PizzaDetail p = {item}/>
-
-                    })            
-                }
+                {this.state.pizzeriasData.map((item) => {
+                    return (
+                        <h3 key={item.id} onClick={() => this.showPizzeriaDetail(item)}>
+                            {item.restaurant_name}, {item.city}
+                        </h3>
+                    );
+                })}
+                {this.state.showComponent ? (
+                    <PizzaDetail pizzeriaDetail={this.state.pizzeria} />
+                ) : null}
+                <PizzaForm/>
             </div>
-        )
+        );
     }
 }
 export default PizzaList;
